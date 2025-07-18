@@ -31,7 +31,7 @@
 
 Will be added..
 
-## 🎥 Video Streaming Setup
+## 🎥 Video Streaming Setup (RAW)
 
 To list all connected video devices: ```bash v4l2-ctl --list-devices ```
 Usually your camera will appear as /dev/video0 or /dev/video1.
