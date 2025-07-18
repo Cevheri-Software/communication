@@ -40,7 +40,10 @@ To test the camera locally:
 ```bash
 gst-launch-1.0 v4l2src device=/dev/video0 ! "image/jpeg,width=640,height=480,framerate=30/1" ! jpegdec ! autovideosink
 ```
-
+Tp check supported formats and frame sizes:
+```bash
+v4l2-ctl --device=/dev/video0 --list-formats-ext
+```
 ### On Jetson Xavier NX (192.168.1.103)
 Captures video from a USB webcam and streams over UDP in H.264 format:
 
