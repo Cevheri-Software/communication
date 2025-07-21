@@ -33,6 +33,11 @@ Will be added..
 
 ## 🎥 Video Streaming Setup (RAW)
 
+```bash
+sudo apt update
+sudo apt install v4l-utils
+```
+
 To list all connected video devices: ```bash v4l2-ctl --list-devices ```
 Usually your camera will appear as /dev/video0 or /dev/video1.
 To test the camera locally:
