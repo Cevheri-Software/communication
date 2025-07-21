@@ -59,6 +59,7 @@ gst-launch-1.0 -v udpsrc port=5000 caps="application/x-rtp, media=video, encodin
 ```
 
 ## DJI Osmo Action Cam
+Captures video from DJI Cam and streams over UDP in H.264 format:
 
 ### On Jetson Xavier NX (192.168.1.103)
 ```bash
