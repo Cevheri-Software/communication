@@ -44,9 +44,11 @@ Tp check supported formats and frame sizes:
 ```bash
 v4l2-ctl --device=/dev/video0 --list-formats-ext
 ```
-### On Jetson Xavier NX (192.168.1.103)
+
+## USB Webcam
 Captures video from a USB webcam and streams over UDP in H.264 format:
 
+### On Jetson Xavier NX (192.168.1.103)
 ```bash
 gst-launch-1.0 v4l2src device=/dev/video0 ! 'image/jpeg,width=640,height=480,framerate=30/1' ! jpegdec ! videoconvert ! x264enc tune=zerolatency bitrate=500 speed-preset=superfast ! rtph264pay ! udpsink host=192.168.1.100 port=5000
 ```
@@ -56,5 +58,18 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! 'image/jpeg,width=640,height=480,fra
 gst-launch-1.0 -v udpsrc port=5000 caps="application/x-rtp, media=video, encoding-name=H264" ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink 
 ```
 
+## DJI Osmo Action Cam
 
+### On Jetson Xavier NX (192.168.1.103)
+```bash
+gst-launch-1.0 v4l2src device=/dev/video0 ! \
+'image/jpeg, width=1280, height=720, framerate=30/1' ! \
+jpegdec ! videoconvert ! x264enc tune=zerolatency bitrate=1000 speed-preset=superfast ! \
+rtph264pay ! udpsink host=192.168.1.100 port=5000
+```
 
+### On Host PC (192.168.1.100) 
+```bash
+gst-launch-1.0 -v udpsrc port=5000 caps="application/x-rtp, media=video, encoding-name=H264" ! \
+rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false
+```
