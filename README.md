@@ -79,3 +79,19 @@ rtph264pay ! udpsink host=192.168.1.100 port=5000
 gst-launch-1.0 -v udpsrc port=5000 caps="application/x-rtp, media=video, encoding-name=H264" ! \
 rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false
 ```
+
+### Optimization Tip (Skip JPEG decode & H.264 re-encode)
+
+Since your camera already supports H.264, you can avoid decoding MJPEG and re-encoding to H.264 — this reduces CPU usage and latency.
+
+Try this zero-copy pipeline (on Jetson):
+
+```bash
+gst-launch-1.0 v4l2src device=/dev/video0 ! \
+'video/x-h264, width=1280, height=720, framerate=30/1' ! \
+h264parse ! rtph264pay config-interval=1 pt=96 ! \
+udpsink host=192.168.1.100 port=5000
+```
+This directly streams the H.264 from the webcam.
+
+Receiver remains the same.
