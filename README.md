@@ -95,3 +95,10 @@ udpsink host=192.168.1.100 port=5000
 This directly streams the H.264 from the webcam.
 
 Receiver remains the same.
+
+### opencv_streaming_test.py 
+
+Run the ```opencv_streaming_test.py``` and then run this script in your HOST PC:
+```bash
+gst-launch-1.0 -v udpsrc port=5000 caps="application/x-rtp, media=video, encoding-name=H264, payload=96" ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false
+```
