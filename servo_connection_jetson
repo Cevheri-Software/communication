@@ -1,0 +1,17 @@
+#include <Servo.h>
+
+Servo myServo;
+
+void setup() {
+  Serial.begin(9600);     // Seri iletişimi başlat
+  myServo.attach(9);      // Servo 9. pine bağlı
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    int angle = Serial.parseInt();     // Jetson'dan gelen açıyı oku
+    if (angle >= 0 && angle <= 180) {
+      myServo.write(angle);            // Servoyu bu açıya döndür
+    }
+  }
+}
