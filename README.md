@@ -102,3 +102,14 @@ Run the ```opencv_streaming_test.py``` and then run this script in your HOST PC:
 ```bash
 gst-launch-1.0 -v udpsrc port=5000 caps="application/x-rtp, media=video, encoding-name=H264, payload=96" ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false
 ```
+
+### Servo Communication
+
+```bash
+conda activate <YOUR_ENV>
+pip install pyserial
+```
+
+```bash
+ssh cevheri@192.168.1.103 "conda activate base && python /home/arduino_writer.py"
+```
