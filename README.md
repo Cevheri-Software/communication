@@ -108,3 +108,11 @@ gst-launch-1.0 -v udpsrc port=5000 caps="application/x-rtp, media=video, encodin
 ```bash
 ssh cevheri@192.168.1.103 "source ~/miniforge3/bin/activate base && python /home/cevheri/arduino_writer.py"
 ```
+
+### Running Program 
+```bash
+ssh cevheri@192.168.1.103
+cd Downloads/cevh
+python cevheri.py
+
+```
